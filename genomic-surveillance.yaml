@@ -6,11 +6,11 @@ inputs:
     metadata: https://data.nextstrain.org/files/ncov/open/reference/metadata.tsv.xz
     aligned: https://data.nextstrain.org/files/ncov/open/reference/aligned.fasta.xz
   - name: custom_data
-    metadata: data/idaho.metadata.tsv
-    sequences: data/idaho.sequences.fasta
+    metadata: data/colombia.metadata.tsv
+    sequences: data/colombia.sequences.fasta
   - name: background_data
-    metadata: https://data.nextstrain.org/files/ncov/open/north-america/metadata.tsv.xz
-    aligned: https://data.nextstrain.org/files/ncov/open/north-america/aligned.fasta.xz
+    metadata: https://data.nextstrain.org/files/ncov/open/south-america/metadata.tsv.xz
+    aligned: https://data.nextstrain.org/files/ncov/open/south-america/aligned.fasta.xz
 
 # GenBank data includes "Wuhan-Hu-1/2019" which we use as the root for this build.
 refine:
@@ -20,19 +20,19 @@ refine:
 # The build name will be "idaho" and it will use the custom
 # subsampling scheme defined below.
 builds:
-  idaho:
-    title: "Idaho-specific genomic surveillance build"
-    subsampling_scheme: idaho_scheme
+  colombia:
+    title: "Colombia-specific genomic surveillance build"
+    subsampling_scheme: colombia_scheme
     # Defines colorings for input data sources
     # (e.g. "background_data" is "yes" or "no").
-    auspice_config: ncov-tutorial/auspice-config-custom-data.json
+    auspice_config: my-ncov-analyses/auspice-config-custom-data.json
 
 # Define a single subsampling scheme for the state of Idaho.
 # This analysis is for a specific date range, so we specify
 # the same maximum collection date for strains in all sections
 # of the subsampling scheme below.
 subsampling:
-  idaho_scheme:
+  colombia_scheme:
     # Include all data from Idaho.
     # When the workflow merges metadata from multiple
     # inputs, it creates a boolean column for each input to
@@ -54,7 +54,7 @@ subsampling:
     # strains that are genetically similar to the strains in
     # the "idaho" subsampling set defined above.
     usa_context:
-      query: --query "(custom_data != 'yes') & (country == 'USA')"
+      query: --query "(custom_data != 'yes') & (country == 'Colombia')"
       # This value sets a hard upper limit on how many strains
       # make it into the analysis. Tune this value, based on
       # your needs for the resulting tree.
